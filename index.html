@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+    <header class="bg-primary text-white text-center p-3">
+        <h1>Meu Site</h1>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Sobre</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
+        </ul>
+    </nav>
+
+    <div class="m-3">
+        <img id="preview-image" class="img-thumbnail" src="#" alt="Selected Image" />
+    </div>
+
+    <head>
+        <title>Formulário de Edição</title>
+    </head>
+    <form>
+        <div class="form-group">
+            <label for="text">Texto:</label>
+            <input type="text" class="form-control" id="text" name="text">
+        </div>
+
+        <label for="figure">Figura:</label><br>
+        <input type id="figure" name="figure" accept="image/*"><br>
+        </div><label for="text">Texto:</label><br>
+        <input type="text" id="text" name="text"><br>
+
+        <label for="holiday">Data comemorativa:</label><br>
+        <select id="holiday" name="holiday">
+            <option value="aniversario">Aniversário</option>
+            <option value="ano_novo">Ano Novo</option>
+            <option value="dia_da_mulher">Dia da Mulher</option>
+            <option value="dia_das_criancas">Dia das Crianças</option>
+            <option value="dia_das_maes">Dia das Mães</option>
+            <option value="dia_dos_namorados">Dia dos Namorados</option>
+            <option value="dia_dos_pais">Dia dos Pais</option>
+            <option value="natal">Natal</option>
+            <option value="pascoa">Páscoa</option>
+        </select><br>
+        <label for="background">Fundo:</label><br>
+        <input type="color" id="background" name="background"><br>
+
+        <label for="border">Borda:</label><br>
+        <input type="text" id="border" name="border"><br>
+
+
+        <input type="submit" value="Submit">
+
+
+        <footer class="footer mt-auto py-3 bg-light">
+            <div class="container">
+                <span class="text-muted">Copyright &copy; 2024</span>
+            </div>
+        </footer>
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <script src="script.js"></script>
+
+
+
+
+</body>
+<script src="script.js"></script>
+
+</html>
