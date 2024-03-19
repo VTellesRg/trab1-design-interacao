@@ -7,8 +7,15 @@ Form.addEventListener('submit', (e) => {
     criarCartao();    
     });
 let storage = localStorage;
-
-function criarCartao() {
+class Cartao {
+    cartao = [];
+    addcartao(cartao, titulo, texto, figura) {
+        this.cartao.push({cartao, titulo, texto, figura})
+        storage.setItem("cartao", JSON.stringify(this.cartao))
+        verCartao()
+    }
+}
+function validarCartao() {
     let cartao = document.getElementById("cartao").value
     let texto = document.getElementById("Texto").value
     let titulo = document.getElementById("titulo").value
@@ -34,20 +41,6 @@ function criarCartao() {
     }
 }
 
-function mostrarCartao () {
-    let cartao = projetos.getcartao()
-    let cartaoHtml = ""
-    for (let i = 0; i < cartao.length; i++) {
-        cartaoHtml += `
-        <div class="cartao">
-            <h3>${cartao[i].cartao}</h3>
-            <p>${cartao[i].texto}</p>
-
-        </div>
-        `
-    }
-    document.getElementById("cartoes").innerHTML = cartaoHtml
-} 
 
 function selecionarFigura() {
     switch (feriado.value) {
@@ -75,5 +68,31 @@ function selecionarFigura() {
         case "dia da mulher":
             figura = "./images/dia_da_mulher.jpg";
             break;
+    }
+}
+
+function criarCartao () {
+    selecionarFigura();
+    let cartao = document.getElementById("cartao").value
+    let texto = document.getElementById("Texto").value
+    let titulo = document.getElementById("titulo").value
+    let figura = document.getElementById("figura").value
+    cartao.addcartao(cartao, titulo, texto, figura)
+
+}
+
+function verCartao() {
+    let cartao = JSON.parse(storage.getItem("cartao"))
+    cartao.innerHTML = ""
+    for (let i = 0; i < cartao.length; i++) {
+        cartao.innerHTML += `
+        <li class="list-group-item mb-2 card">
+        <div class=" justify-content-center ">
+            <img src="${cartao[i].figura}" alt="figura">
+            <h3>${cartao[i].titulo}</h3>
+            <p>${cartao[i].texto}</p>
+        </div>
+        </li>
+        `
     }
 }
