@@ -1,36 +1,37 @@
+document.addEventListener('DOMContentLoaded', (event) => {
+    console.log('DOM fully loaded and parsed');});
 const Form = document.getElementById('form');
 let figura = "";
 let feriado = document.getElementById('ocasiao');
-
 Form.addEventListener('submit', (e) => {
     e.preventDefault();
     criarCartao();    
-    });
+});
 let storage = localStorage;
+
+function criarCartao () {
+    selecionarFigura();
+    var texto = document.getElementById("texto").value
+    var titulo = document.getElementById("titulo").value
+    var figura = document.getElementById("figura").value
+    cartao.addcartao(titulo, texto, figura)
+    
+}
 class Cartao {
     cartao = [];
-    addcartao(cartao, titulo, texto, figura) {
-        this.cartao.push({cartao, titulo, texto, figura})
+    addcartao(titulo, texto, figura) {
+        this.cartao.push({titulo, texto, figura})
         storage.setItem("cartao", JSON.stringify(this.cartao))
-        verCartao()
     }
 }
-function validarCartao() {
-    let cartao = document.getElementById("cartao").value
-    let texto = document.getElementById("Texto").value
-    let titulo = document.getElementById("titulo").value
+let cartao = new Cartao();
 
-    if (cartao !== "" && Texto !== "") {
-        projetos.addcartao(cartao, Texto)
-        document.getElementById("cartao").setAttribute("class", "")
-        document.getElementById("texto").setAttribute("class", "")
-        document.getElementById("cartao").value = ""
-        document.getElementById("texto").value = ""
-    }
-    if (cartao === "") {
-        document.getElementById("cartao").setAttribute("class", " ")
-        document.getElementById("validarCartao").innerHTML = 'A descrição da cartao não pode estar vazia'
-    }
+console.log(cartao);
+
+function validarCartao() {
+    let texto = document.getElementById("texto").value
+    let titulo = document.getElementById("titulo").value
+    let fundo = document.getElementById("fundo").value
     if (texto === "") {
         document.getElementById("texto").setAttribute("class", " ")
         document.getElementById("validartexto").innerHTML = 'O texto não pode estar vazio'
@@ -38,6 +39,10 @@ function validarCartao() {
     if (titulo === "") {
         document.getElementById("titulo").setAttribute("class", " ")
         document.getElementById("validartitulo").innerHTML = 'O titulo não pode estar vazio'
+    }
+    if (fundo === "") {
+        document.getElementById("fundo").setAttribute("class", " ")
+        document.getElementById("validarfundo").innerHTML = 'O fundo não pode estar vazio'
     }
 }
 
@@ -68,31 +73,29 @@ function selecionarFigura() {
         case "dia da mulher":
             figura = "./images/dia_da_mulher.jpg";
             break;
+        case "ano novo":
+            figura = "./images/ano_novo.jpg";
+            break;
     }
+    return figura;
 }
 
-function criarCartao () {
-    selecionarFigura();
-    let cartao = document.getElementById("cartao").value
-    let texto = document.getElementById("Texto").value
-    let titulo = document.getElementById("titulo").value
-    let figura = document.getElementById("figura").value
-    cartao.addcartao(cartao, titulo, texto, figura)
-
-}
 
 function verCartao() {
-    let cartao = JSON.parse(storage.getItem("cartao"))
-    cartao.innerHTML = ""
+    let cartao = JSON.parse(localStorage.getItem("cartao"));
+    let container = document.getElementById("Visualizacao"); 
+    container.innerHTML = "";
     for (let i = 0; i < cartao.length; i++) {
-        cartao.innerHTML += `
+        let cartaoAtual = cartao[i];
+        container.innerHTML += `
         <li class="list-group-item mb-2 card">
-        <div class=" justify-content-center ">
-            <img src="${cartao[i].figura}" alt="figura">
-            <h3>${cartao[i].titulo}</h3>
-            <p>${cartao[i].texto}</p>
+        <div class=" btn-toolbar justify-content-center ">
+            <img src="${cartaoAtual.figura}" alt="figura">
+            <h3>${cartaoAtual.titulo}</h3>
+            <p>${cartaoAtual.texto}</p>
         </div>
         </li>
-        `
+        `;
     }
+
 }
