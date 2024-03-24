@@ -1,101 +1,100 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    console.log('DOM fully loaded and parsed');});
-const Form = document.getElementById('form');
-let figura = "";
-let feriado = document.getElementById('ocasiao');
-Form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    criarCartao();    
+	console.log('DOM fully loaded and parsed');
 });
-let storage = localStorage;
 
-function criarCartao () {
-    selecionarFigura();
-    var texto = document.getElementById("texto").value
-    var titulo = document.getElementById("titulo").value
-    var figura = document.getElementById("figura").value
-    cartao.addcartao(titulo, texto, figura)
-    
-}
+const form = document.getElementById('form');
+const feriado = document.getElementById('ocasiao');
+
+form.addEventListener('submit', (e) => {
+	e.preventDefault();
+	criarCartao();
+});
+
 class Cartao {
-    cartao = [];
-    addcartao(titulo, texto, figura) {
-        this.cartao.push({titulo, texto, figura})
-        storage.setItem("cartao", JSON.stringify(this.cartao))
-    }
-}
-let cartao = new Cartao();
+	constructor() {
+		this.cartoes = [];
+	}
 
-console.log(cartao);
-
-function validarCartao() {
-    let texto = document.getElementById("texto").value
-    let titulo = document.getElementById("titulo").value
-    let fundo = document.getElementById("fundo").value
-    if (texto === "") {
-        document.getElementById("texto").setAttribute("class", " ")
-        document.getElementById("validartexto").innerHTML = 'O texto não pode estar vazio'
-    }
-    if (titulo === "") {
-        document.getElementById("titulo").setAttribute("class", " ")
-        document.getElementById("validartitulo").innerHTML = 'O titulo não pode estar vazio'
-    }
-    if (fundo === "") {
-        document.getElementById("fundo").setAttribute("class", " ")
-        document.getElementById("validarfundo").innerHTML = 'O fundo não pode estar vazio'
-    }
+	addCartao(titulo, texto, figura, fundo, borda, corTexto) {
+		this.cartoes.push({ titulo, texto, figura, fundo, borda, corTexto});
+		localStorage.setItem("cartoes", JSON.stringify(this.cartoes));
+	}
 }
 
+const cartao = new Cartao();
+
+function criarCartao() {
+	const titulo = document.getElementById("titulo").value;
+	const texto = document.getElementById("texto").value;
+	const figura = selecionarFigura();
+	const fundo = document.getElementById("background").value;
+	const borda = document.getElementById("border").value;
+	const corTexto = document.getElementById("font-color").value;
+
+	cartao.addCartao(titulo, texto, figura, fundo, borda, corTexto);
+	verCartao();
+}
 
 function selecionarFigura() {
-    switch (feriado.value) {
-        case "aniversario":
-            figura = "./images/aniversario.png";
-            break;
-        case "natal":
-            figura = "./images/natal.jpg";
-            break;
-        case "pascoa":
-            figura = "./images/pascoa.jpg";
-            break;
-        case "dia dos pais":
-            figura = "./images/dia_dos_pais.jpg";
-            break;
-        case "dia das maes":
-            figura = "./images/dia_das_maes.jpg";
-            break;
-        case "dia dos namorados":
-            figura = "./images/namorados.jpg";
-            break;
-        case "dia das crianças":
-            figura = "./images/dia_da_crianca.jpg";
-            break;
-        case "dia da mulher":
-            figura = "./images/dia_da_mulher.jpg";
-            break;
-        case "ano novo":
-            figura = "./images/ano_novo.jpg";
-            break;
-    }
-    return figura;
+	let figura = "";
+
+	console.log(feriado.value);
+	switch (feriado.value) {
+		case "aniversario":
+			figura = "./images/aniversario.jpg";
+			break;
+		case "natal":
+			figura = "./images/natal.jpg";
+			break;
+		case "pascoa":
+			figura = "./images/pascoa.jpg";
+			break;
+		case "dia_dos_pais":
+			figura = "./images/dia_dos_pais.jpg";
+			break;
+		case "dia_das_maes":
+			figura = "./images/dia_das_maes.jpg";
+			break;
+		case "dia_dos_namorados":
+			figura = "./images/namorados.jpg";
+			break;
+		case "dia_das_criancas":
+			figura = "./images/dia_da_crianca.jpg";
+			break;
+		case "dia_da_mulher":
+			figura = "./images/dia_da_mulher.jpg";
+			break;
+		case "ano_novo":
+			figura = "./images/ano_novo.jpg";
+			break;
+	}
+	return figura;
 }
 
 
 function verCartao() {
-    let cartao = JSON.parse(localStorage.getItem("cartao"));
-    let container = document.getElementById("Visualizacao"); 
-    container.innerHTML = "";
-    for (let i = 0; i < cartao.length; i++) {
-        let cartaoAtual = cartao[i];
-        container.innerHTML += `
-        <li class="list-group-item mb-2 card">
-        <div class=" btn-toolbar justify-content-center ">
-            <img src="${cartaoAtual.figura}" alt="figura">
-            <h3>${cartaoAtual.titulo}</h3>
-            <p>${cartaoAtual.texto}</p>
-        </div>
-        </li>
-        `;
-    }
+	const cartoes = JSON.parse(localStorage.getItem("cartoes")) || [];
+	const container = document.getElementById("Visualizacao");
 
+	if (cartoes.length > 0) {
+		container.innerHTML = "";
+
+		cartoes.forEach(cartao => {
+			let imagemHTML = cartao.figura ? `<img src="${cartao.figura}" alt="figura" style="max-width: 100%; height: auto;">` : '';
+			const cartaoHTML = `
+                <li class="list-group-item mb-2 card">
+                    <div class="btn-toolbar d-flex flex-column justify-content-center align-items-center" style=" background-color: ${cartao.fundo}; border: 2px solid ${cartao.borda}">
+						<h3 style ="font: Arial; font-color=${cartao.corTexto};">${cartao.titulo}</h3>
+						${imagemHTML}
+                        <p style ="font: Arial; font-color=${cartao.corTexto};">${cartao.texto}</p>
+                    </div>
+                </li>
+            `;
+			container.innerHTML += cartaoHTML;
+		});
+
+		container.parentNode.style.display = "block"; // Exibe a div que contém os cartões
+	} else {
+		container.parentNode.style.display = "none"; // Oculta a div que contém os cartões
+	}
 }

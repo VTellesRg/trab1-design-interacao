@@ -2,78 +2,80 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cartões</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Cartões</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
 
 
-    <nav class="">
-        <ul class="navbar">
-            <li class=""><a class=" " href="#">Home</a></li>
-            <li class=""><a class=" " href="#">Sobre</a></li>
-            <li class=""><a class=" " href="#">Contato</a></li>
-        </ul>
-    </nav>
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+		<ul class="container-fluid">
+			<li class="nav-item" href="#"><a class="nav-link active" aria-current="page">Home</a></li>
+			<li class="nav-item" href="#"><a class="nav-link active" aria-current="page">Sobre</a></li>
+			<li class="nav-item" href="#"><a class="nav-link active" aria-current="page">Contato</a></li>
+		</ul>
+	</nav>
 
 <body>
 
-    <div class="container mt-5">
-        <h1 class="text-center">Crie Seu Cartão</h1>
-        <div>
-            <form class="w-75 card p-4 m-auto" id="form">
-                <div class="form-group">
-                    <label for="titulo">Título</label>
-                    <input type="text" class="form-control" id="titulo" placeholder="Informe um título para o cartão.">
-                    <div id="validarTitulo" class="invalid-feedback text-end"></div>
-                </div>
-                <div class="form-group">
-                    <label for="texto">Texto</label>
-                    <input type="text" class="form-control" id="texto" placeholder="Digite um texto para o cartão.">
-                    <div id="validarTexto" class="invalid-feedback text-end"></div>
-                </div>
-                <label for="ocasiao">Ocasiao:</label><br>
-                <select id="ocasiao" name="ocasiao" class="form-control">
-                    <option value="aniversario">Aniversário</option>
-                    <option value="ano_novo">Ano Novo</option>
-                    <option value="dia_da_mulher">Dia da Mulher</option>
-                    <option value="dia_das_criancas">Dia das Crianças</option>
-                    <option value="dia_das_maes">Dia das Mães</option>
-                    <option value="dia_dos_namorados">Dia dos Namorados</option>
-                    <option value="dia_dos_pais">Dia dos Pais</option>
-                    <option value="natal">Natal</option>
-                    <option value="pascoa">Páscoa</option>
-                </select><br>
-                <label for="background" class="form-control" >Fundo:</label><br>
-                <input type="color" class="form-control" id="background" name="background"><br>
+	<div class="container mt-5">
+		<h1 class="text-center">Crie Seu Cartão</h1>
+		<div class="d-flex flex-column justify-content-center align-items-center ">
+			<div class="col-md-8">
+				<form class="w-75 card p-4 m-auto" id="form">
+					<div class="form-group">
+						<label for="titulo">Título</label>
+						<input type="text" class="form-control" id="titulo"
+							placeholder="Informe um título para o cartão.">
+						<div id="validarTitulo" class="invalid-feedback text-end"></div>
+					</div>
+					<div class="form-group">
+						<label for="texto">Texto</label>
+						<input type="text" class="form-control" id="texto" placeholder="Digite um texto para o cartão.">
+						<div id="validarTexto" class="invalid-feedback text-end"></div>
+					</div>
+					<label for="ocasiao">Ocasiao:</label><br>
+					<select id="ocasiao" name="ocasiao" class="form-control">
+						<option value="aniversario">Aniversário</option>
+						<option value="ano_novo">Ano Novo</option>
+						<option value="dia_da_mulher">Dia da Mulher</option>
+						<option value="dia_das_criancas">Dia das Crianças</option>
+						<option value="dia_das_maes">Dia das Mães</option>
+						<option value="dia_dos_namorados">Dia dos Namorados</option>
+						<option value="dia_dos_pais">Dia dos Pais</option>
+						<option value="natal">Natal</option>
+						<option value="pascoa">Páscoa</option>
+					</select><br>
+					<label for="background" class="form-control">Fundo:</label><br>
+					<input type="color" class="form-control" id="background" name="background"><br>
 
-                <label for="border" class="form-control" >Borda:</label><br>
-                <input type="color" class="form-control" id="border" name="border"><br>
-                <label for="font-color" class="form-control">Fonte: </label><br>
-                <input type="color" class="form-control" id="font-color" name="font-color"><br>
-                
-                <div class="align-self-center mt-2">
-                    <button type="button" class="btn btn-primary" onclick="criarCartao()">Visualizar</button>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-4" style="max-height: 550px;">
-            <h2 class="text-center">Seu Cartão</h2>
-            <div id="Visualizacao" class="card p-2 overflow-auto">
-                <ul class="list-group" id="visual"></ul>
-                </ul>
-            </div>
-        </div>
+					<label for="border" class="form-control">Borda:</label><br>
+					<input type="color" class="form-control" id="border" name="border"><br>
+					<label for="font-color" class="form-control">Fonte: </label><br>
+					<input type="color" class="form-control" id="font-color" name="font-color"><br>
 
-    </div>
-        <footer class="">
-            <div class="">
-                <span class="">Copyright &copy; 2024</span>
-            </div>
-        </footer>
-        <script src="script.js"></script>
+					<div class="align-self-center mt-2">
+						<button type="button" class="btn btn-primary" onclick="criarCartao()">Visualizar</button>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-4">
+				<div id="cartoes-container" class="flex-column" style="display: none;">
+					<h2 class="text-center">Seu Cartão</h2>
+					<div id="Visualizacao" class="card p-2 overflow-auto">
+						<ul class="list-group" id="visual"></ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="mt-5">
+			<div class="text-center">
+				<span>&copy; 2024</span>
+			</div>
+		</footer>
+	</div>
+	<script src="script.js"></script>
 </body>
 
 </html>
