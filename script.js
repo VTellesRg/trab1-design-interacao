@@ -82,13 +82,13 @@ function verCartao() {
 		cartoes.forEach(cartao => {
 			let imagemHTML = cartao.figura ? `<img src="${cartao.figura}" alt="figura" style="max-width: 100%; height: auto;">` : '';
 			const cartaoHTML = `
-                <li class="list-group-item mb-2 card">
+                <div class="list-group-item mb-2 card">
                     <div class="btn-toolbar d-flex flex-column justify-content-center align-items-center" style=" background-color: ${cartao.fundo}; border: 2px solid ${cartao.borda}">
-						<h3 style ="font: Arial; font-color=${cartao.corTexto};">${cartao.titulo}</h3>
+						<h3>${cartao.titulo}</h3>
 						${imagemHTML}
-                        <p style ="font: Arial; font-color=${cartao.corTexto};">${cartao.texto}</p>
+                        <p>${cartao.texto}</p>
                     </div>
-                </li>
+                </div>
             `;
 			container.innerHTML += cartaoHTML;
 		});
